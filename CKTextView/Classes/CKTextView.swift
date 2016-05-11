@@ -40,6 +40,7 @@ public class CKTextView: UITextView, UITextViewDelegate, UIActionSheetDelegate {
         self.delegate = self
         
         setupNotificationCenterObservers()
+        setInputAccessoryView()
         
     }
     
@@ -48,6 +49,18 @@ public class CKTextView: UITextView, UITextViewDelegate, UIActionSheetDelegate {
     func setupNotificationCenterObservers()
     {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CKTextView.keyboardWillShow), name: UIKeyboardDidShowNotification, object: nil)
+    }
+    
+    func setInputAccessoryView()
+    {
+        var toolbar:UIToolbar = UIToolbar.init(frame: CGRectMake(0,0,440,40))
+        let toolbarButtonItem = [
+            UIBarButtonItem.init(title: "order", style: UIBarButtonItemStyle.Plain, target: self, action: nil),
+            UIBarButtonItem.init(title: "unorder", style: UIBarButtonItemStyle.Plain, target: self, action: nil),
+            UIBarButtonItem.init(title: "check", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
+        ]
+        toolbar.setItems(toolbarButtonItem, animated:true)
+        self.inputAccessoryView = toolbar
     }
     
     // MARK: Drawing
